@@ -3,7 +3,7 @@
 {% block content %}
     <div class="content-section">
         <div class="media">
-            <img class="rounded-circle account-img" src=" {{user.profile.image.url}} " alt="">
+            <img class="rounded-circle account-img" src=" {{users.profile.image.url}} " alt="">
         <div class="media-body">
             <h2 class="account-heading"> {{user.username}} </h2>
             <p class="text-secondary"> {{ user.email}}</p>
@@ -20,6 +20,7 @@
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Update</button>
+                <button class="btn btn-outline-info" type="submit"> <a href="{% url 'about' %}">About {{user.username}} </a> </button>
             </div>
         </form>
     </div>
