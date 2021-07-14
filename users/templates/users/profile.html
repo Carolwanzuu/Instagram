@@ -1,28 +1,74 @@
-{% extends "photos/base.html" %}
+{% extends 'photos/base.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
-    <div class="content-section">
-        <div class="media">
-            <img class="rounded-circle account-img" src=" {{users.profile.image.url}} " alt="">
-        <div class="media-body">
-            <h2 class="account-heading"> {{user.username}} </h2>
-            <p class="text-secondary"> {{ user.email}}</p>
-        </div>
-        </div>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">
-                    Profile  &#x1F60a;
-                </legend>
-                {{u_form|crispy}}
-                {{p_form|crispy}}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
-                <button class="btn btn-outline-info" type="submit"> <a href="{% url 'about' %}">About {{user.username}} </a> </button>
-            </div>
-        </form>
-    </div>
+{% load static %}
 
-{% endblock content %}
+{% block content %}
+
+<div class="row mt-5">
+    <div class="col-md-6 text-center">
+
+        <img src="{{ user.profile.image.url }}" alt="" class="img-fluid profilepic">
+
+    </div>
+    <div class="col-md-6">
+        <div class="profileheader">
+            <div class='d-flex justify-content-between align-items-center'>
+                <h3>{{ user.username }}</h3>
+                <button class="btn btn-md btn-outline-dark" data-toggle="modal" data-target="#myModal">Edit
+                    Profile</button>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-md-3">
+                <p>{{ user_pics.count}} Posts</p>
+                <p>{{ user.following.all.count }} Following</p>
+                <p>{{ user.follower.all.count }} Followers</p>
+            </div>
+            <div class="extras">
+
+            </div>
+            <h5><strong>{{ user.profile.fullName }}</strong></h5>
+            <p>bio: {{ user.profile.bio }}</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content p-4">
+            <h3 class="text-center">Update Profile</h3>
+            <form method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ user_form|crispy }}
+                <br>
+                {{ profile_form|crispy}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<h3 class='text-center mt-5'>Post Picture</h3>
+
+<div class="d-flex justify-content-center align-item center mt-5">
+    <form action="" method='POST' enctype="multipart/form-data">
+        {%csrf_token%}
+        <input type="hidden" name="userid" value='{{user.id}}'>
+       
+        <button type="submit" class="btn login-button">Save changes</button>
+    </form>
+</div>
+
+<hr>
+<div class="wrapper-grid justify-content-center align-items-center text-center mb-5">
+    <div class="m-1 contimage">
+        <a href="{% url 'profile'  %}"><img src="{{ image.image.url }}" alt=""
+                class="img-fluid userpics"></a>
+    </div>
+    
+</div>
+
+<p class="text-center">No Posts Yet</p>
+
+
+{% endblock %}

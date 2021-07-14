@@ -3,22 +3,47 @@
 {% for post in posts %}
 <article class="media content-section">
     <div class='container'>
-        <div class='row'>
-            <div class='col-md-8'>
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">{{ post.name}}</a>
-                        <small class="text-muted">{{ post.created_on }}</small>
-                        <img class="img-fluid" src="{{post.image.url}}" alt="Responsive image" >
-                    </div>
-                    <h2><a class="article-title" href="#">{{ post.caption}}</a></h2>
-                    <p class="article-content">{{ post.author }}</p>
-                </div>
+        <!-- <div class='row'> -->
+        <!-- <div class='col-md-7'> -->
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post.name}}</a>
+                <small class="text-muted">{{ post.created_on }}</small>
+                <img class="img-fluid" src="{{post.image.url}}" alt="Responsive image">
             </div>
-            <div class='col-md-3'>
+            <h2><a class="article-title" href="#">{{ post.caption}}</a></h2>
+            <p class="article-content">{{ post.author }}</p>
+        </div>
 
+        <!-- <div class='col-md-5'> -->
+        <div class="card card-signin my-5">
+            <div class="card-body">
+                <h5 class="card-title text-center">Sign In</h5>
+                <form class="form-signin">
+                    <div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+                            autofocus>
+                        <label for="inputEmail">Email address</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Password</label>
+                    </div>
+
+
+                    <button class="btn btn-lg btn-block text-uppercase" type="submit"> <a href="{% url 'login' %}"> Sign
+                            in</a></button>
+                    <hr class="my-4">
+                    <p><small>You don't have an account?</small></p>
+                    <button class="btn btn-lg  btn-block text-uppercase" type="submit"> <a href="{% url 'register' %}">
+                            Sign Up</a></button>
+                </form>
             </div>
         </div>
+
+    </div>
+    </div>
     </div>
 </article>
 
