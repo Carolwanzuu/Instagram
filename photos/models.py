@@ -9,7 +9,7 @@ class Post(models.Model):
      created_on = models.DateTimeField(auto_now_add=True)
      last_modified = models.DateTimeField(auto_now=True)
      author = models.ForeignKey(User, on_delete=models.CASCADE)
-     likes = models.IntegerField(null=True, default=0)
+     image_likes = models.IntegerField(null=True, default=0)
 
      def __str__(self):
          return self.name
