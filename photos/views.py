@@ -10,7 +10,7 @@ def home(request):
     context = {
         'posts': Post.objects.all()
     }
-    return render(request, 'photos/home.html', context)
+    return render(request, context)
 
 def about(request):
     if request.method == 'POST':
