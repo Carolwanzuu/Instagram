@@ -7,10 +7,8 @@ from django.conf import settings
 
 
 def home(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'photos/home.html', context)
+    
+    return render(request, 'photos/home.html', {'posts': Post.objects.all()})
 
 def about(request):
     if request.method == 'POST':
