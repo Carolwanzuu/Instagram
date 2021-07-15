@@ -5,7 +5,7 @@
 ## Description
 A clone of Instagram website
  
-##User Story
+.User Story
 *Sign in to the application to start using.
 *Upload my pictures to the application.
 *See my profile with all my pictures.
