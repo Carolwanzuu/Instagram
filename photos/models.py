@@ -22,9 +22,18 @@ class Profile(models.Model):
          @receiver(post_save, sender=User)
          def save_user_profile(sender, instance, **kwargs):
            instance.profile.save()
-           
-           def __str__(self):
-             return self.u_name
+
+           def delete_profile(self):
+             self.delete()
+
+             @classmethod
+             def search_profile(cls,search_term):
+               your_profiles = cls.objects.filter(first_name__icontains = search_term)
+               return your_profiles
+
+             
+             def __str__(self):
+               return self.u_name
 
 class Post(models.Model):
      image = models.ImageField(blank=True)
@@ -41,6 +50,7 @@ class Post(models.Model):
      def save_picture(self):
        self.save()
 
+      
 @classmethod
 def delete_picture(cls, id):
     cls.objects.filter(id=id).delete()
@@ -60,7 +70,7 @@ def all_pictures(cls):
     return all_pics
 
 class Meta:
-    ordering = ['-posted']
+    ordering = ['-created_on']
 
 class Comments(models.Model):
   comment = models.CharField(max_length=200, null=True, blank=True)
@@ -75,8 +85,25 @@ class Comments(models.Model):
     cls.objects.filter(id=id).delete()
 
 class Follow(models.Model):
-  follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
-  following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+  follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  following = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __int__(self):
+    return self.name
+
+  def save_follower(self):
+    self.save()
+    
+  def delete_follower(self):
+    self.save()
+
+class Unfollow(models.Model):
+	follower = models.ForeignKey(Profile,null=True)
+	following = models.ForeignKey(User,null=True)
+
+	def __int__(self):
+		return self.name
+
 
 class Likes(models.Model):
   likes = models.BooleanField(default=False)
@@ -88,3 +115,6 @@ class Likes(models.Model):
 
   def save_like(self): 
     self.save()
+    
+  def unlike(self):
+    self.delete()
