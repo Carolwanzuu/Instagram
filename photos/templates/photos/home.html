@@ -3,7 +3,7 @@
 {% for post in posts %}
 <article class="media content-section">
     <div class='container'>
-        <!-- <div class='row'> -->
+        <div class='row'>
         <!-- <div class='col-md-7'> -->
         <div class="media-body">
             <div class="article-metadata">
@@ -16,26 +16,31 @@
         </div>
 
         <!-- <div class='col-md-5'> -->
-        <div class="card card-signin my-5">
+        <div class="card card-signin my-5 pb-auto">
             <div class="card-body">
                 <h5 class="card-title text-center">Sign In</h5>
+                <br>
                 <form class="form-signin">
                     <div class="form-label-group">
                         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required
                             autofocus>
+                            <br>
                         <label for="inputEmail">Email address</label>
                     </div>
-
+                    <br>
                     <div class="form-label-group">
                         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <br>
                         <label for="inputPassword">Password</label>
                     </div>
-
+                    <br>
 
                     <button class="btn btn-lg btn-block text-uppercase" type="submit"> <a href="{% url 'login' %}"> Sign
                             in</a></button>
+                            <br>
                     <hr class="my-4">
                     <p><small>You don't have an account?</small></p>
+                    <br>
                     <button class="btn btn-lg  btn-block text-uppercase" type="submit"> <a href="{% url 'register' %}">
                             Sign Up</a></button>
                 </form>

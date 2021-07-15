@@ -1,74 +1,182 @@
-{% extends 'photos/base.html' %}
-{% load crispy_forms_tags %}
+{% extends "photos/base.html" %}
 {% load static %}
-
 {% block content %}
+{{ block.super }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="">
+    <title>{{image_id.username}}</title>
+</head>
+<body>
 
-<div class="row mt-5">
-    <div class="col-md-6 text-center">
 
-        <img src="{{ user.profile.image.url }}" alt="" class="img-fluid profilepic">
+<title>{{image_id.username}}</title>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {%for profile in profile%}
+            <img src={{post.image.url}}
+                style="width: 300px; height: 300px; border-radius: 50%; margin-top: 100px;margin-left: 100px ">
+            <div class="well" style="float: right; margin-top: 170px; margin-right: 300px">
+                <div class="">
+                    <h5 style="float: left; margin-left: 20px; font-size: 30px; font-weight: bold; margin-top: -1px">
+                        {{profile.username}}</h5>
+                    <i class="fa fa-gear" style="font-size:24px; float: right;  margin-left: 30px"></i>
+                    <a href="{% url 'upload_profile' %}"><button class="btn btn-primary"
+                            style="background-color: #EEEEEE; color: black; float: right; margin-left: 30px; height: 30px">Edit
+                            Profile</button></a>
+                </div>
 
-    </div>
-    <div class="col-md-6">
-        <div class="profileheader">
-            <div class='d-flex justify-content-between align-items-center'>
-                <h3>{{ user.username }}</h3>
-                <button class="btn btn-md btn-outline-dark" data-toggle="modal" data-target="#myModal">Edit
-                    Profile</button>
+                <hr>
+                <div class="profile">
+                    <div>
+                        <h4 style="float: left; margin-left: -70px">{{image_id.followers}} followers : <strong>500</h4>
+                        </stong>
+                        </h4>
+                    </div>
+                    <div>
+                        <h4 style="float: right;">{{image_id.following }} following : <strong>500</h4>
+                        </stong>
+                        </h4>
+                    </div>
+                    <button
+                        style="margin-left: 130px; background-color:#1E88E5; width: 70px; margin-top: 10px">follow</button>
+                </div>
+
+
+                <ul>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-md-3">
-                <p>{{ user_pics.count}} Posts</p>
-                <p>{{ user.following.all.count }} Following</p>
-                <p>{{ user.follower.all.count }} Followers</p>
-            </div>
-            <div class="extras">
 
+            <img src="{{profile.profile.url}}" class="img-responsive" alt="">
+            </ul>
+            <h3>{{image_id.u_name}}{{image_id.caption}}</h3>
+
+            {%endfor%}
+            <div class="col-md-6">
+                <h1>{{image_id.username}}</h1>
+                <a href="{{image_id.url}}" class="profile-link">{{image_id.url}}</a>
             </div>
-            <h5><strong>{{ user.profile.fullName }}</strong></h5>
-            <p>bio: {{ user.profile.bio }}</p>
+        </div>
+        <div class="profile-images row">
+
+
+
+
         </div>
     </div>
-</div>
+    <strong style="text-align: center; font-size: 30px">Recent posts</strong>
+    <div class="row ml-5">
+        <div class="col-md-4">
+            
+            <img src="https://cdn.vox-cdn.com/thumbor/snpdl6uWGe_epo_uj6j_fIj5-GM=/269x0:2724x1841/1200x800/filters:focal(269x0:2724x1841)/cdn.vox-cdn.com/uploads/chorus_image/image/45995618/homeparis.0.0.jpg"
+                style="width: 100%; height: 40vh">
+                <hr>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-xs-2">
+                            <input type="text" placeholder="comments..">
+                            <button type="button" class="btn btn-outline-info btn-sm">Send</button>
+                            <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                </form>
+        </div>
+        <br>
 
+        <div class="col-md-4">
 
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content p-4">
-            <h3 class="text-center">Update Profile</h3>
-            <form method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
-                {% csrf_token %}
-                {{ user_form|crispy }}
-                <br>
-                {{ profile_form|crispy}}
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLuROOTOHVif0JeMYybJMVy7D8tbBGa9NsT14kHQF-uGcI8DwGo9UAuc8mT3O6b_wVAU&usqp=CAU"
+                style="width: 100%; height: 40vh">
+                <hr>
+            <form>
+                <div class="form-group row">
+                    <div class="col-xs-2">
+                        <input type="text" placeholder="comments..">
+                        <button type="button" class="btn btn-outline-info btn-sm">Send</button>
+                        <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                    </div>
                 </div>
             </form>
         </div>
+        <br>
+        <div class="col-md-4">
+            <img src="https://thumbs.dreamstime.com/b/headshot-african-american-male-glasses-posing-studio-portrait-smiling-man-wearing-casual-clothes-look-camera-image-153874435.jpg"
+                style="width: 100%; height: 40vh">
+                <hr>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-xs-2">
+                            <input type="text" placeholder="comments..">
+                            <button type="button" class="btn btn-outline-info btn-sm">Send</button>
+                            <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                </form>
+        </div>
+
+    </div><br>
+
+    <div class="row ml-5">
+        <div class="col-md-4">
+
+            <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                style="width: 100%; height: 40vh">
+                <hr>
+            <form>
+                <div class="form-group row">
+                    <div class="col-xs-2">
+                        <input type="text" placeholder="comments..">
+                        <button type="button" class="btn btn-outline-info btn-sm">Send</button>
+                        <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div class="col-md-4">
+
+            <img src="https://images.unsplash.com/photo-1510797215324-95aa89f43c33?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fG5hdHVyZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                style="width: 100%; height: 40vh">
+                <hr>
+            <form>
+                <div class="form-group row">
+                    <div class="col-xs-2">
+                        <input type="text" placeholder="comments..">
+                        <button type="button" class="btn btn-outline-info btn-sm">Send</button>
+                        <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div class="col-md-4">
+            <img src="https://cdn.nohat.cc/thumb/f/720/comhicliparttvkpg.jpg" style="width: 100%; height: 40vh">
+            <hr>
+            <form>
+                <div class="form-group row">
+                    <div class="col-xs-2">
+                        <input type="text" placeholder="comments..">
+                        <button type="button" class="btn btn-outline-info btn-sm">Send</button>
+                        
+                        <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
-<h3 class='text-center mt-5'>Post Picture</h3>
 
-<div class="d-flex justify-content-center align-item center mt-5">
-    <form action="" method='POST' enctype="multipart/form-data">
-        {%csrf_token%}
-        <input type="hidden" name="userid" value='{{user.id}}'>
-       
-        <button type="submit" class="btn login-button">Save changes</button>
-    </form>
-</div>
-
-<hr>
-<div class="wrapper-grid justify-content-center align-items-center text-center mb-5">
-    <div class="m-1 contimage">
-        <a href="{% url 'profile' %}"><img src="{{ user.post.image.url }}" alt=""
-                class="img-fluid userpics"></a>
-    </div>
-    
-</div>
-
-<p class="text-center">No Posts Yet</p>
-
-
+<script>
+    function myFunction(x) {
+      x.classList.toggle("fa-thumbs-down");
+    }
+</script>
 {% endblock %}
+</body>
+</html>

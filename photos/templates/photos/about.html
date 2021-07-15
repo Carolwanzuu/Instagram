@@ -1,68 +1,28 @@
 {% extends "photos/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
-<h1>About Page</h1>
-<div class="container">
-    <div class="row">
-        <div class="content-section">
-            <div class="media">
-                <img class="rounded-circle account-img" src=" {{user.profile.image.url}} " alt="">
-                <div class="media-body">
-                    <h2 class="account-heading"> {{user.username}} </h2>
-                    <p class="text-secondary"> {{ user.email}}</p>
-                </div>
-            </div>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">
-                        Profile &#x1F60a;
-                    </legend>
-                    {{a_form|crispy}}
-
-                </fieldset>
-
-            </form>
-            <form class="md-form">
-
-                <div class="d-flex justify-content-center">
-                    <div class="btn btn-mdb-color btn-rounded float-left">
-                        <span>Add photo</span>
-                        <input type="file">
-                        <img src=" {{photos.post.image.url}} " alt="">
-                    </div>
-                </div>
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src=" {{user.profile.image.url}} " alt="">
+        <div class="media-body">
+            <h2 class="account-heading"> {{user.username}} </h2>
+            <p class="text-secondary"> {{ user.email}}</p>
         </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Profile  &#x1F60a;
+                </legend>
+                {{u_form|crispy}}
+                {{p_form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+                <button class="btn btn-outline-info" type="submit"> <a href="{% url 'about' %}">About {{user.username}} </a> </button>
+            </div>
         </form>
     </div>
-</div>
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    {% endblock content %}
+{% endblock content %}

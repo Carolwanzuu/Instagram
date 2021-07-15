@@ -48,8 +48,8 @@
       </nav>
     </header>
     <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-7">
+      <div class="row ml-5">
+        <div class="col-md-10">
             {% if messages %}
                 {% for message in messages %}
                 <div class="alert alert-{{message.tags}}">
@@ -60,7 +60,7 @@
           {% block content %}{% endblock %}
         </div>
         
-          <div class="col-md-5">
+          <div class="col-md-2">
            
           </div>
         </div>

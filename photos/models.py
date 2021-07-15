@@ -85,8 +85,8 @@ class Comments(models.Model):
     cls.objects.filter(id=id).delete()
 
 class Follow(models.Model):
-  follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
-  following = models.ForeignKey(User, on_delete=models.CASCADE)
+  user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+  follower = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __int__(self):
     return self.name
@@ -98,8 +98,8 @@ class Follow(models.Model):
     self.save()
 
 class Unfollow(models.Model):
-	follower = models.ForeignKey(Profile,null=True)
-	following = models.ForeignKey(User,null=True)
+	user = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
+	follower = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
 
 	def __int__(self):
 		return self.name
