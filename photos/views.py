@@ -7,8 +7,10 @@ from django.conf import settings
 
 
 def home(request):
-    
-    return render(request, 'photos/home.html', {'posts': Post.objects.all()})
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'home.html', context)
 
 def about(request):
     if request.method == 'POST':
@@ -19,10 +21,7 @@ def about(request):
     else:
         form=ProfileForm()
         
-        # context = {
-        # 'a_form': a_form
-        # }
-
+        
 
 
     return render(request, 'users/profile.html', {'form':form})
