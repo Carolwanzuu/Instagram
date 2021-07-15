@@ -3,16 +3,14 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.http  import HttpResponse
-
 
 
 
 def home(request):
-    # context = {
-    #     'posts': Post.objects.all()
-    # }
-    return HttpResponse('Welcome to the Instagram clone')
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'photos/home.html', context)
 
 def about(request):
     if request.method == 'POST':
